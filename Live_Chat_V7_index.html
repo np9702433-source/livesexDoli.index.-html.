@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Live Chat V7 | Connect, Discover & Chat Online</title>
+<meta name="description" content="Live Chat V7 — discover people, communities, photos and videos with a responsive social chat interface and Google Sign-In-ready account UI.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://YOUR-DOMAIN.com/">
+<meta name="theme-color" content="#5b21b6">
+<meta property="og:title" content="Live Social Chat | Connect, Discover & Chat Online">
+<meta property="og:description" content="Discover profiles, explore community content and connect online.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://YOUR-DOMAIN.com/">
+<meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Live Chat">
+<meta name="twitter:description" content="Connect, discover and chat online.">
+<meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.jpg">
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#182033;line-height:1.55}
+header{position:sticky;top:0;z-index:50;background:linear-gradient(135deg,#5b21b6,#2563eb);color:#fff;box-shadow:0 3px 18px #0002}
+.nav{max-width:1150px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:15px 18px}
+.logo{font-size:22px;font-weight:800}
+.nav nav{display:flex;flex-wrap:wrap}
+.nav a{color:#fff;text-decoration:none;margin-left:14px;font-size:14px}
+.hero{padding:72px 18px;text-align:center;background:linear-gradient(180deg,#fff,#eef3ff)}
+.hero h1{font-size:44px;line-height:1.1;margin:8px}
+.hero p{max-width:700px;margin:15px auto;color:#596274}
+.btn{display:inline-block;border:0;border-radius:25px;padding:12px 21px;text-decoration:none;font-weight:700;cursor:pointer;margin:5px}
+.primary{background:#5b21b6;color:#fff}
+.secondary{background:#e9edf5;color:#182033}
+.danger{background:#fff1f2;color:#be123c}
+.container{max-width:1150px;margin:auto;padding:25px 16px}
+.title{text-align:center;margin:36px 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.card,.panel,.video,.post{background:#fff;border-radius:17px;box-shadow:0 5px 20px #17255412}
+.card{overflow:hidden}
+.card img{width:100%;height:220px;object-fit:cover}
+.content{padding:15px}
+.online{color:#16a34a;font-weight:700;font-size:13px}
+.search{display:flex;gap:8px;max-width:650px;margin:0 auto 25px}
+.search input,.form input,.chat-input{flex:1;padding:13px 16px;border:1px solid #d9deea;border-radius:12px;font-size:16px}
+.gallery img{height:210px;border-radius:15px;width:100%;object-fit:cover}
+.video{padding:12px}
+.video iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}
+.panel{padding:25px;margin-top:20px}
+.form{max-width:480px;margin:auto}
+.form input{width:100%;margin:7px 0}
+.form textarea,.postbox textarea{width:100%;min-height:100px;padding:13px;border:1px solid #ddd;border-radius:10px}
+footer{margin-top:45px;background:#111827;color:#dbe2ef;padding:35px 18px;text-align:center}
+footer a{color:#fff;margin:0 8px;text-decoration:none}
+.age{position:fixed;inset:0;background:#0b1020f5;z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px}
+.agebox{max-width:430px;background:#fff;border-radius:22px;padding:30px;text-align:center}
+.agebox .icon{font-size:55px}
+.agebox h2{font-size:30px;margin:8px}
+.agebox p{color:#596274}
+.agebox button{width:100%;padding:14px;border:0;border-radius:10px;margin-top:9px;font-weight:700;cursor:pointer;background:#5b21b6;color:#fff}
+.agebox .leave{background:#e5e7eb;color:#111827}
+.modal{position:fixed;inset:0;background:#0009;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
+.modalbox{width:min(520px,100%);background:#fff;border-radius:20px;padding:24px}
+.close{float:right;border:0;background:#eee;border-radius:8px;padding:7px;cursor:pointer}
+.toast{position:fixed;right:18px;bottom:18px;background:#111827;color:#fff;padding:13px 17px;border-radius:12px;display:none;z-index:1100}
+.actions{display:flex;gap:7px;flex-wrap:wrap}
+.post{padding:18px}
+.posthead{display:flex;justify-content:space-between}
+.v3-features{padding:54px 20px;background:linear-gradient(180deg,#fff,#f8fafc)}
+.v3-wrap{max-width:1180px;margin:auto}
+.v3-title{text-align:center;margin:0 0 10px;font-size:clamp(28px,4vw,42px)}
+.v3-sub{text-align:center;color:#64748b;max-width:720px;margin:0 auto 28px}
+.v3-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.v3-card{background:#fff;border:1px solid #e5e7eb;border-radius:22px;overflow:hidden;box-shadow:0 10px 28px rgba(15,23,42,.07);transition:.2s}
+.v3-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(15,23,42,.12)}
+.v3-img{height:150px;background-size:cover;background-position:center}
+.v3-body{padding:17px}
+.v3-body h3{margin:0 0 7px;font-size:20px}
+.v3-body p{margin:0;color:#64748b;font-size:14px;line-height:1.55}
+.v3-pill{display:inline-block;margin-top:12px;padding:6px 10px;border-radius:999px;background:#fff1f2;color:#e11d48;font-size:12px;font-weight:700}
+.v4-auth{max-width:680px;margin:28px auto;padding:24px;border:1px solid #e5e7eb;border-radius:24px;background:#fff;box-shadow:0 14px 38px rgba(15,23,42,.08);text-align:center}
+.v4-auth h3{margin:0 0 7px;font-size:24px}
+.v4-auth p{color:#64748b;margin:0 0 18px}
+.v4-google{width:100%;max-width:430px;min-height:48px;border:1px solid #dadce0;border-radius:10px;background:#fff;color:#202124;font-size:15px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:12px}
+.v4-glogo{font-size:21px;font-weight:800;font-family:Arial,sans-serif;color:#4285f4}
+.v4-status{margin-top:14px;font-size:13px;color:#64748b}
+.v4-user{display:none;margin-top:16px;padding:14px;border-radius:14px;background:#f8fafc}
+.v4-user strong{display:block;margin-bottom:4px}
+.v4-config{margin-top:12px;font-size:12px;color:#64748b;line-height:1.5}
+.v4-badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#ecfdf5;color:#047857;font-weight:700}
+.dark{background:#10131c;color:#eef2ff}
+.dark .panel,.dark .card,.dark .video,.dark .post,.dark .v3-card,.dark .v4-auth,.dark .modalbox{background:#181d2a;color:#eef2ff}
+.dark input,.dark textarea{background:#222838;color:#fff;border-color:#3b455d}
+@media(max-width:900px){.v3-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.nav{align-items:flex-start}.nav nav{display:none}.hero h1{font-size:32px}.hero{padding:48px 15px}}
+@media(max-width:560px){.v3-features{padding:38px 14px}.v3-grid{grid-template-columns:1fr}.v3-img{height:180px}}
+</style>
+</head>
+
+<body>
+<div aria-labelledby="ageTitle" aria-modal="true" class="age" id="ageGate" role="dialog">
+  <div class="agebox">
+    <div class="icon">🔞</div>
+    <h2 id="ageTitle">18+ Age Gate</h2>
+    <p>This website is intended for adults aged 18 years or older. By entering, you confirm that you are 18+.</p>
+    <button onclick="enterSite()">I am 18+ — Enter</button>
+    <button class="leave" onclick="leaveSite()">I am under 18 — Leave</button>
+  </div>
+</div>
+
+<header>
+  <div class="nav">
+    <div class="logo">💬 Live Chat V7</div>
+    <nav>
+      <a href="#home">Home</a><a href="#people">People</a><a href="#photos">Photos</a>
+      <a href="#videos">Videos</a><a href="#account">Account</a>
+      <a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <h1>Connect. Discover. Chat.</h1>
+  <p>Discover community profiles, explore social content and start new conversations in a clean, mobile-friendly experience.</p>
+  <a class="btn primary" href="#account">Create Free Account</a>
+  <a class="btn secondary" href="#people">Explore People</a>
+</section>
+
+<main class="container">
+  <h2 class="title" id="people">Discover People</h2>
+  <div class="search">
+    <input aria-label="Search profiles" id="search" oninput="filterPeople()" placeholder="Search profiles...">
+  </div>
+
+  <div class="grid" id="peopleGrid">
+    <article class="card person"><img alt="Community profile Alex" loading="lazy" src="https://picsum.photos/600/700?random=21"><div class="content"><h3>Alex</h3><div class="online">● Online</div><button class="btn primary" onclick="openChat('Alex')">Chat</button></div></article>
+    <article class="card person"><img alt="Community profile Emma" loading="lazy" src="https://picsum.photos/600/700?random=22"><div class="content"><h3>Emma</h3><div class="online">● Online</div><button class="btn primary" onclick="openChat('Emma')">Chat</button></div></article>
+    <article class="card person"><img alt="Community profile Sophia" loading="lazy" src="https://picsum.photos/600/700?random=23"><div class="content"><h3>Sophia</h3><div class="online">● Online</div><button class="btn primary" onclick="openChat('Sophia')">Chat</button></div></article>
+    <article class="card person"><img alt="Community profile Olivia" loading="lazy" src="https://picsum.photos/600/700?random=24"><div class="content"><h3>Olivia</h3><div class="online">● Online</div><button class="btn primary" onclick="openChat('Olivia')">Chat</button></div></article>
+  </div>
+
+  <h2 class="title" id="posts">📝 Community Posts</h2>
+  <div class="grid">
+    <article class="post">
+      <div class="posthead"><strong>Alex</strong><span>Today</span></div>
+      <p>What is your favorite travel destination?</p>
+      <div class="actions"><button class="btn secondary" onclick="likePost(this)">♡ Like <span>0</span></button><button class="btn secondary" onclick="shareSite()">↗ Share</button><button class="btn danger" onclick="reportItem()">⚑ Report</button></div>
+    </article>
+    <article class="post">
+      <div class="posthead"><strong>Emma</strong><span>Yesterday</span></div>
+      <p>Photography and books are my favorite weekend interests.</p>
+      <div class="actions"><button class="btn secondary" onclick="likePost(this)">♡ Like <span>0</span></button><button class="btn secondary" onclick="shareSite()">↗ Share</button><button class="btn danger" onclick="reportItem()">⚑ Report</button></div>
+    </article>
+  </div>
+
+  <section class="panel postbox">
+    <h2>➕ Create Community Post</h2>
+    <textarea id="newPost" placeholder="Write a public community post..."></textarea>
+    <button class="btn primary" onclick="createPost()">Publish Demo Post</button>
+  </section>
+
+  <h2 class="title" id="photos">Photo Gallery</h2>
+  <div class="grid gallery">
+    <img alt="Live Social Chat community gallery image" loading="lazy" src="https://picsum.photos/800/600?random=31">
+    <img alt="Social community gallery image" loading="lazy" src="https://picsum.photos/800/600?random=32">
+    <img alt="Community members gallery image" loading="lazy" src="https://picsum.photos/800/600?random=33">
+    <img alt="Social gallery image" loading="lazy" src="https://picsum.photos/800/600?random=34">
+  </div>
+
+  <h2 class="title" id="videos">Featured Videos</h2>
+  <p style="text-align:center;color:#596274">Use videos you own or have permission to embed. Replace the demo YouTube IDs before publishing.</p>
+  <div class="grid">
+    <div class="video"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" src="https://www.youtube.com/embed/ScMzIvxBSi4" title="Featured community video"></iframe><h3>Featured Community Video</h3></div>
+    <div class="video"><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" src="https://www.youtube.com/embed/aqz-KE-bpKQ" title="Discover and connect video"></iframe><h3>Discover & Connect</h3></div>
+  </div>
+
+  <section class="panel" id="chat">
+    <h2>💬 Chat Preview</h2>
+    <p id="chatText">Select a profile above to start a chat.</p>
+    <input class="chat-input" aria-label="Message" id="message" placeholder="Type a message...">
+    <button class="btn primary" onclick="sendMessage()">Send Message</button>
+  </section>
+
+  <section class="panel" id="account">
+    <div class="form">
+      <h2>📝 Create Your Account</h2>
+      <p>Demo registration form. A real account system requires a secure backend.</p>
+      <input autocomplete="name" id="name" placeholder="Your name">
+      <input autocomplete="email" id="email" placeholder="Email address" type="email">
+      <input autocomplete="new-password" id="pass" placeholder="Password" type="password">
+      <button class="btn primary" onclick="signup()" style="width:100%">Sign Up</button>
+      <p aria-live="polite" id="signupMsg"></p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>🔗 Partner / Affiliate Links</h2>
+    <p>Add legitimate partner or affiliate links here. Replace the example URL before publishing.</p>
+    <a class="btn primary" href="https://example.com" rel="sponsored nofollow" target="_blank">Visit Partner</a>
+  </section>
+
+  <h2 class="title">❓ Frequently Asked Questions</h2>
+  <section class="panel"><details><summary><b>Is Live Chat free?</b></summary><p>The current version is a frontend demo. Membership and pricing can be connected later.</p></details></section>
+  <section class="panel"><details><summary><b>Can users have profiles and private messages?</b></summary><p>Yes, after a secure backend and database are connected.</p></details></section>
+  <section class="panel"><details><summary><b>Can I add my own images and videos?</b></summary><p>Yes. Replace demo media with your own or properly licensed content.</p></details></section>
+
+  <section class="panel" id="about"><h2>About Us</h2><p>Live Chat is a social community concept for discovering profiles, sharing permitted content and connecting with other users.</p></section>
+  <section class="panel" id="privacy"><h2>Privacy Policy</h2><p>Replace this demo text with your final privacy policy before collecting real user information. Explain data collection, purposes, retention, sharing and user rights.</p></section>
+  <section class="panel" id="terms"><h2>Terms & Conditions</h2><p>Add your final terms, community rules, moderation policy, prohibited content rules and applicable legal requirements before launch.</p></section>
+  <section class="panel" id="contact"><h2>Contact Us</h2><p>Email: <a href="mailto:YOUR-EMAIL@example.com">YOUR-EMAIL@example.com</a></p></section>
+</main>
+
+<section class="v3-features" id="live-features">
+  <div class="v3-wrap">
+    <h2 class="v3-title">Live Chat Features</h2>
+    <p class="v3-sub">Discover people, communities and image-based spaces. These 8 sections are ready for your future photos, videos and real user content.</p>
+    <div class="v3-grid">
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>Reema Live</h3><p>Featured people and friendly community profiles.</p><span class="v3-pill">People</span></div></article>
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>Mona Live</h3><p>Popular profile cards with photo and activity highlights.</p><span class="v3-pill">Popular</span></div></article>
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>India Live</h3><p>India-focused discovery area for communities and posts.</p><span class="v3-pill">India</span></div></article>
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>Trending</h3><p>Trending profiles, posts and topics in one place.</p><span class="v3-pill">Trending</span></div></article>
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>New Members</h3><p>Showcase recently joined community members.</p><span class="v3-pill">New</span></div></article>
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>Photo Hub</h3><p>Gallery-style image area for your future uploads.</p><span class="v3-pill">Photos</span></div></article>
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>Video Hub</h3><p>Video discovery area ready for owned or permitted videos.</p><span class="v3-pill">Videos</span></div></article>
+      <article class="v3-card"><div class="v3-img" style="background-image:url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80')"></div><div class="v3-body"><h3>Communities</h3><p>Topic-based groups and community posts for engagement.</p><span class="v3-pill">Groups</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="v4-auth" id="google-auth">
+  <h3>Continue with Google</h3>
+  <p>Sign in quickly and securely to Live Chat.</p>
+  <button aria-label="Continue with Google" class="v4-google" id="v4GoogleBtn" type="button"><span class="v4-glogo">G</span>Continue with Google</button>
+  <div class="v4-status" id="v4AuthStatus">Google Sign-In setup ready</div>
+  <div class="v4-user" id="v4UserBox">
+    <strong id="v4UserName"></strong><span id="v4UserEmail"></span><br>
+    <button id="v4LogoutBtn" style="margin-top:10px;padding:8px 14px;border:0;border-radius:9px;cursor:pointer" type="button">Sign out</button>
+  </div>
+  <div class="v4-config"><span class="v4-badge">V7 READY</span><br>For real Google authentication, add your Google Client ID and connect the callback to Firebase, Supabase or your own secure backend. Never put a private secret in this HTML file.</div>
+</section>
+
+<footer>
+  <h2>💬 Live Chat V7</h2>
+  <p>Connect • Discover • Chat</p>
+  <a href="#about">About</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a><a href="#contact">Contact</a>
+  <p>© 2026 Live Chat V7</p>
+</footer>
+
+<div class="modal" id="modal"><div class="modalbox"><button class="close" onclick="closeModal()">✕</button><div id="modalContent"></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+function enterSite(){localStorage.setItem("ageConfirmed","yes");document.getElementById("ageGate").style.display="none"}
+function leaveSite(){window.location.href="https://www.google.com/"}
+if(localStorage.getItem("ageConfirmed")==="yes")document.getElementById("ageGate").style.display="none";
+
+function filterPeople(){
+  const q=document.getElementById("search").value.toLowerCase();
+  document.querySelectorAll(".person").forEach(x=>x.style.display=x.innerText.toLowerCase().includes(q)?"block":"none");
+}
+function openChat(name){
+  document.getElementById("chatText").innerText="Chatting with "+name+" — demo interface. Connect your secure backend for real-time chat.";
+  document.getElementById("chat").scrollIntoView({behavior:"smooth"});
+}
+function sendMessage(){
+  const m=document.getElementById("message").value.trim();
+  if(!m)return toast("Please type a message.");
+  toast("Demo message sent");
+  document.getElementById("message").value="";
+}
+function signup(){
+  const n=document.getElementById("name").value.trim();
+  const e=document.getElementById("email").value.trim();
+  const p=document.getElementById("pass").value;
+  const out=document.getElementById("signupMsg");
+  if(!n||!e||!p){out.innerText="Please fill all fields.";return}
+  out.innerText="Demo account created. Connect a secure backend before collecting real passwords.";
+}
+function toast(t){
+  const x=document.getElementById("toast");x.textContent=t;x.style.display="block";
+  clearTimeout(window._toast);window._toast=setTimeout(()=>x.style.display="none",2200);
+}
+function toggleDark(){
+  document.body.classList.toggle("dark");
+  localStorage.setItem("livechatDark",document.body.classList.contains("dark")?"1":"0");
+}
+if(localStorage.getItem("livechatDark")==="1")document.body.classList.add("dark");
+function likePost(b){
+  const s=b.querySelector("span");s.textContent=Number(s.textContent)+1;
+  b.firstChild.textContent="♥ Like ";
+}
+function shareSite(){
+  if(navigator.share){
+    navigator.share({title:"Live Chat V7",text:"Discover and connect on Live Chat",url:location.href}).catch(()=>{});
+  }else if(navigator.clipboard){
+    navigator.clipboard.writeText(location.href).then(()=>toast("Link copied")).catch(()=>toast("Copy failed"));
+  }else toast("Sharing is not supported on this browser");
+}
+function reportItem(){toast("Report option opened. Connect moderation backend before launch.")}
+function closeModal(){document.getElementById("modal").style.display="none"}
+function createPost(){
+  const x=document.getElementById("newPost").value.trim();
+  if(!x)return toast("Write something first.");
+  toast("Demo post published");
+  document.getElementById("newPost").value="";
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Live Chat V7",
+  "url":"https://YOUR-DOMAIN.com/",
+  "description":"Social community for discovering profiles and connecting with people."
+}
+</script>
+
+<script>
+/*
+ LIVE CHAT V7 GOOGLE AUTH
+ Front-end only. Replace YOUR_GOOGLE_CLIENT_ID with your OAuth Web Client ID.
+ Real user sessions must be verified server-side.
+*/
+(function(){
+  const btn=document.getElementById("v4GoogleBtn");
+  const status=document.getElementById("v4AuthStatus");
+  const userBox=document.getElementById("v4UserBox");
+  const userName=document.getElementById("v4UserName");
+  const userEmail=document.getElementById("v4UserEmail");
+  const logout=document.getElementById("v4LogoutBtn");
+
+  const GOOGLE_CLIENT_ID="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com";
+
+  window.handleGoogleCredential=function(response){
+    try{
+      const payload=JSON.parse(atob(response.credential.split(".")[1].replace(/-/g,"+").replace(/_/g,"/")));
+      userName.textContent=payload.name||"Google User";
+      userEmail.textContent=payload.email||"";
+      userBox.style.display="block";
+      status.textContent="Google account selected. Server verification is required for production.";
+      sessionStorage.setItem("liveChatGoogleDemo","1");
+    }catch(e){
+      status.textContent="Google response received.";
+    }
+  };
+
+  btn.addEventListener("click",function(){
+    if(GOOGLE_CLIENT_ID.startsWith("YOUR_")){
+      toast("पहले Google Client ID सेट करें। अभी यह demo-ready है।");
+      status.textContent="Waiting for Google Client ID configuration";
+      return;
+    }
+    if(window.google&&google.accounts&&google.accounts.id){
+      google.accounts.id.initialize({client_id:GOOGLE_CLIENT_ID,callback:window.handleGoogleCredential});
+      google.accounts.id.prompt();
+    }else{
+      toast("Google Sign-In library अभी load नहीं हुई है। GIS script जोड़ें।");
+    }
+  });
+
+  logout.addEventListener("click",function(){
+    userBox.style.display="none";
+    status.textContent="Signed out";
+    sessionStorage.removeItem("liveChatGoogleDemo");
+  });
+})();
+</script>
+</body>
+</html>
